@@ -6,17 +6,36 @@ pipeline {
       environment{
             LOGIC_LEVEL='INFO'
         }
-      steps {
+      steps{
         echo "Building Release ${RELEASE} with log level ${LOG_LEVEL} ..."
       }
     }
     stage('Test'){
       steps{
-        echo "Testing Release ${RELEASE} log level ${LOG_LEVEL} is not visible..."
+        echo "Testing Release ${RELEASE} ..."
+      }
+      }
+      stage('Deploy'){
+        input{
+          message 'Deploy'
+          ok 'Do it'
+          parameters{
+            string(name: 'TARGET_ENVIRONMENT',defaultValue: 'PROD', description: 'Target deployment')
+          }
+        }
+       steps{
+         echo "Testing Release ${RELEASE} to environment ${TARGET_ENVIRONMENT}..."
       }
     }
 
   }
+  post{
+    always{
+         echo "Prints whether deploy was success or failure..."
+      }
+    
+  }
+  
   environment {
     RELEASE = '20.05'
   }

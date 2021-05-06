@@ -7,12 +7,12 @@ pipeline {
             LOGIC_LEVEL='INFO'
         }
       steps {
-        echo 'Building Release ${RELEASE} with log level ${LOG_LEVEL} ...'
+        echo "Building Release ${RELEASE} with log level ${LOG_LEVEL} ..."
       }
     }
     stage('Test'){
       steps{
-        echo 'Testing Release ${RELEASE} log level ${LOG_LEVEL} is not visible...'
+        echo "Testing Release ${RELEASE} log level ${LOG_LEVEL} is not visible..."
       }
     }
 
